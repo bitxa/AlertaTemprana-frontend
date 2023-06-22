@@ -1,0 +1,49 @@
+@import "./base.css";
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i&display=swap");
+
+:root {
+  --backgroundcolor_dark: #ffffff;
+  --aside-backgroundcolor_dark: #00416F;
+  --form-backgroundcolor_dark: #00416F;
+  --fontcolor_dark: #ffffff;
+  --secondary_fontcolor_dark:   ;
+  --input_backgroundcolor_dark: #242529 ;
+  --menu_buttoncolor_dark: #242529;
+  --input_bordercolor_dark: #e6e6ec;
+  --secondary_input_bordercolor_dark: #FDBF01;
+  --secondary_background_color_dark: #FDBF01;
+}
+
+#app {
+  width: 100%;
+  min-height: 100vh;
+  font-weight: normal;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  padding: 0%;
+  margin: 0;
+  scroll-behavior: smooth;
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  scrollbar-width: none;  /* Firefox */
+}
+
+aside::-webkit-scrollbar {
+  width: 0;  /* Remove scrollbar space */
+  background: transparent;  /* Optional: just make scrollbar invisible */
+}
+
+li {
+  list-style: none;
+}
+
+h2{
+  text-transform: capitalize;
+}
+
+p{
+  text-transform: capitalize;
+}
