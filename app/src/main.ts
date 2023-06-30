@@ -1,4 +1,4 @@
-import { createApp, type DirectiveBinding } from "vue";
+import { createApp } from "vue";
 import App from "./App.vue";
 import { createPinia } from "pinia";
 import router from "./router";
@@ -11,6 +11,9 @@ import * as directives from "vuetify/directives";
 
 // CSS
 import "material-icons/iconfont/material-icons.css";
+
+//ProCalendar
+
 
 const vuetify = createVuetify({
   components,

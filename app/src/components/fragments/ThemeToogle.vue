@@ -47,6 +47,7 @@ export default {
 <style>
 .toggle {
     margin: 1vh;
+    padding: 1rem;
     position: relative;
     display: flex;
     align-items: center;
@@ -67,7 +68,7 @@ export default {
     height: 20px;
     margin: 0 5px;
     transition: opacity 0.4s;
-    
+
 }
 </style>
   

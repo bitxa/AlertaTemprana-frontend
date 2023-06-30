@@ -5,7 +5,7 @@ const router = createRouter({
   routes: [
     {
       path: "/",
-      redirect: "/panel",
+      redirect: "/login",
     },
 
     {
@@ -15,14 +15,9 @@ const router = createRouter({
     },
 
     {
-      path: "/panel",
-      name: "admin-panel",
-      component: () => import("../views/AdminPanelView.vue"),
-      children: [
-        { path: "competitions", component: Object },
-        { path: "circuits", component: Object },
-        { path: "racers", component: Object },
-      ],
+      path: "/student/panel",
+      name: "student_panel",
+      component: () => import("../views/StudentView.vue"),
     },
   ],
 });
