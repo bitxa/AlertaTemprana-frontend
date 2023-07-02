@@ -3,43 +3,45 @@
 
 <template>
     <v-container fluid class="admin-panel">
+        <button class="menu-toggle-button" @click="toggleMenu">
+            <ChMenuKebab class="menu-icon" :class="{ 'menu-icon-active': !showMenu }" />
+        </button>
+        <aside :class="{ 'hide-menu': !showMenu }">
+            <v-icon class="aside-close-icon" @click="hideMenuButton">
+                <MdRoundArrowBackIosNew></MdRoundArrowBackIosNew>
+            </v-icon>
 
-        <aside :class="{ 'hide-menu': !showMenu }" @mouseleave="hideMenuButton" @mouseover="showMenuButton">
             <img src="../assets/img/utpl_tec_logo.png" class="logo">
-            <div class="user">
-                <img src="../assets/img/user_icon.webp" class="user_icon">
-                <h3 class="name">Joel Romero</h3>
-                <h3 class="username">
-                    <b>@jsromero13</b>
-                </h3>
-                <h6 class="role">estudiante</h6>
 
+            <div class="user">
+                <UserInfo />
             </div>
 
             <div class="menu">
-                <button type="button" class="menu_button" @click="selectMenuItem('dashboard')"
-                    :class="{ active: currentComponent === 'Dashboard' }">
+                <button type="button" class="menu_button" @click="selectMenuItem('tasks')"
+                    :class="{ active: currentComponent === 'Tasks' }">
                     <span>
-                        <FlFilledPanelSeparateWindow class=" menu_icon" />
+                        <MdAssignment class=" menu_icon" />
                     </span>
+                    <v-tooltip activator="parent" location="start">Tareas</v-tooltip>
                 </button>
 
                 <button type="button" class="menu_button" @click="selectMenuItem('evidences')"
                     :class="{ active: currentComponent === 'Evidences' }">
-                    <v-tooltip left>
+                    <span>
+                        <JaFillFiles class="menu_icon" />
+                    </span>
+                    <v-tooltip activator="parent" location="start">Evidencias</v-tooltip>
 
-                        <span>
-                            <JaFillFiles class="menu_icon" />
-                        </span>
-                    </v-tooltip>
                 </button>
 
 
-                <button type="button" class="menu_button" @click="selectMenuItem('work_placements')"
-                    :class="{ active: currentComponent === 'WorkPlacements' }">
+                <button type="button" class="menu_button" @click="selectMenuItem('workplacement')"
+                    :class="{ active: currentComponent === 'WorkPlacement' }">
                     <span>
                         <FaLayerGroup class="menu_icon" />
                     </span>
+                    <v-tooltip activator="parent" location="start">Plaza</v-tooltip>
                 </button>
 
                 <button type="button" class="menu_button" @click="selectMenuItem('calendar')"
@@ -47,59 +49,57 @@
                     <span>
                         <FaRegCalendarDays class="menu_icon" />
                     </span>
+                    <v-tooltip activator="parent" location="start">Calendario tareas</v-tooltip>
                 </button>
-
-                <ThemeToogle style="align-self: bottom;" />
             </div>
+            <ThemeToogle />
         </aside>
 
         <main>
-            <button class="menu-toggle-button" @click="toggleMenu">
-                <ChMenuHamburger class="menu-icon" :class="{ 'menu-icon-active': !showMenu }" />
-            </button>
             <keep-alive>
                 <component :is="currentComponent" :key="currentComponent"></component>
             </keep-alive>
         </main>
+
     </v-container>
 </template>
 
 <script lang="ts">
 // ICONS
-import { FlFilledPanelSeparateWindow } from "@kalimahapps/vue-icons";
+import { MdAssignment } from "@kalimahapps/vue-icons";
 import { JaFillFiles } from "@kalimahapps/vue-icons";
 import { FaRegCalendarDays } from "@kalimahapps/vue-icons";
 import { FaLayerGroup } from "@kalimahapps/vue-icons";
-import { ChMenuHamburger } from "@kalimahapps/vue-icons";
+import { ChMenuKebab } from "@kalimahapps/vue-icons";
+import { MdRoundArrowBackIosNew } from "@kalimahapps/vue-icons";
 // FRAGMENTS
 import ThemeToogle from "@/components/fragments/ThemeToogle.vue"
+import UserInfo from "@/components/fragments/UserInfo.vue";
 // COMPONENTS
-import Dashboard from "@/components/student/Dashboard.vue";
-import Evidences from "@/components/student/Evidences.vue";
-import WorkPlacements from "@/components/student/WorkPlacements.vue";
+import Tasks from "@/components/professor/Tasks.vue";
 
 
-//Vuex Storage
+
 export default {
-    name: 'StudentView',
+    name: 'ProfessorView',
     components: {
         //icons
-        FlFilledPanelSeparateWindow,
+        MdAssignment,
         JaFillFiles,
         FaRegCalendarDays,
         FaLayerGroup,
-        ChMenuHamburger,
+        ChMenuKebab,
+        MdRoundArrowBackIosNew,
         //components
-        Dashboard,
-        Evidences,
-        WorkPlacements,
+        Tasks,
 
         //fragments
         ThemeToogle,
+        UserInfo
     },
     data() {
         return {
-            currentComponent: localStorage.getItem('lastComponent') || 'Dashboard',
+            currentComponent: localStorage.getItem('lastComponent') || 'Tasks',
             showMenu: true,
             timeout: null as any,
             lightMode: false,
@@ -108,14 +108,17 @@ export default {
     methods: {
         selectMenuItem(menuItem: string) {
             switch (menuItem) {
-                case 'dashboard':
-                    this.currentComponent = 'Dashboard';
+                case 'tasks':
+                    this.currentComponent = 'Tasks';
                     break;
                 case 'evidences':
                     this.currentComponent = 'Evidences';
                     break;
-                case 'work_placements':
-                    this.currentComponent = 'TeamsComponent';
+                case 'workplacement':
+                    this.currentComponent = 'WorkPlacement';
+                    break;
+                case 'calendar':
+                    this.currentComponent = 'Calendar';
                     break;
             }
             localStorage.setItem('lastComponent', this.currentComponent);
@@ -126,13 +129,9 @@ export default {
         },
 
         hideMenuButton() {
-            this.timeout = setTimeout(() => {
-                this.showMenu = false;
-            }, 2000);
+            this.showMenu = false;
         },
-
         showMenuButton() {
-            clearTimeout(this.timeout);
             this.showMenu = true;
         },
 

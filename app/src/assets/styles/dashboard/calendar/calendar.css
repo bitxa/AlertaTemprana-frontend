@@ -1,0 +1,175 @@
+
+.month-calendar {
+  width: 100%;
+  height: 100%;
+  background-color: #f9f9f9;
+  margin-right: 2vh;
+}
+
+.header {
+  margin: 0 auto;
+  width: 50%;
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  font-family: Arial, Helvetica, sans-serif;
+  margin-bottom: 2vh;
+}
+
+.header button {
+  height: auto;
+  color: #febe01;
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.month {
+  text-transform: uppercase;
+  letter-spacing: 1vh;
+  font-weight: 800;
+  font-size: 1.5rem;
+}
+
+.year {
+  background-color: transparent;
+  font-size: 1.7rem;
+  color: #febe01;
+}
+
+.year option {
+  background-color: #fff;
+  color: #000;
+}
+
+.weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.weekday {
+  font-weight: 800;
+  text-align: center;
+}
+
+.days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 1vh;
+  padding: 1vh;
+  height: 80vh;
+  max-height: 90vh;
+  overflow-y: scroll;
+}
+
+.day {
+  display: flex;
+  height: 20vh;
+  flex-direction: column;
+  padding: 0.5vh;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease;
+}
+
+.day:hover {
+  cursor: pointer;
+  background-color: #febe01;
+}
+
+.day-number {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 0.5vh;
+}
+
+.events {
+  display: flex;
+  flex-direction: grid;
+  align-items: start;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 1vh;
+  padding-top: 0%;
+}
+
+.event-btn {
+  display: flex;
+  width: 100%;
+  height: 30%;
+  padding: 2vh;
+  color: #da0378;
+  border: 0.5px solid #da0378;
+  border-radius: 0.7vh;
+  font-size: 0.9rem;
+  font-weight: 600;
+  align-items: center;
+  text-align: left;
+  white-space: nowrap;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-color: transparent;
+  text-overflow: clip;
+}
+
+.event-btn .task-icon {
+  font-size: 1.5rem;
+  margin: 1vh;
+}
+
+.event-btn::-webkit-scrollbar {
+  display: none !important;
+}
+
+
+.event-btn:hover {
+  cursor: pointer;
+  background-color: #da0378;
+  color: #f9f9f9;
+}
+
+.dialog-bottom-transition-enter {
+  transform: translateY(100%);
+  opacity: 0;
+}
+
+.dialog-bottom-transition-enter-active {
+  transition: all 0.3s ease;
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.dialog-bottom-transition-leave {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.dialog-bottom-transition-leave-active {
+  transition: all 0.3s ease;
+  transform: translateY(100%);
+  opacity: 0;
+}
+
+.v-dialog {
+  max-width: 30rem;
+}
+
+.text-h2 {
+  font-size: 1.3rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+}
+
+.pa-12 {
+  padding: 1.2rem;
+}
+
+.isToday{
+    border-color: #febe01;
+    border-width: 0.3ch;
+}

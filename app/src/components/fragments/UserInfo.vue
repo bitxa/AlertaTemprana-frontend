@@ -16,7 +16,7 @@
                         @{{ user.username }}
                     </p>
                     <v-divider class="my-3"></v-divider>
-                    <v-btn rounded variant="text">
+                    <v-btn rounded variant="text" @click="disconnect()">
                         Desconectar
                     </v-btn>        
                 </div>
@@ -36,6 +36,12 @@ export default {
             email: 'jsromero13@utpl.edu.ec',
         },
     }),
+
+    methods: {
+        disconnect() {
+            this.$router.push('/login');
+        }
+    }
 }
 </script>
 

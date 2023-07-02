@@ -15,9 +15,21 @@ const router = createRouter({
     },
 
     {
+      path: "/student/select-hours",
+      name: "select_hours",
+      component: () => import("../components/fragments/HourCalendarSelection.vue"),
+    },
+
+    {
       path: "/student/panel",
       name: "student_panel",
       component: () => import("../views/StudentView.vue"),
+    },
+
+    {
+      path: "/professor/panel",
+      name: "professor_panel",
+      component: () => import("../views/ProfessorView.vue"),
     },
   ],
 });

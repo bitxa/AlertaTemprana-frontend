@@ -11,10 +11,11 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted } from 'vue'
+import { defineComponent, onMounted } from 'vue';
 
 export default defineComponent({
   name: 'App',
+  
 
   data() {
     return {

@@ -8,12 +8,12 @@
     </v-tabs>
 
     <v-window class="windows-container" v-model="tab">
-      <v-window-item class="window-item scrollable" value="pending">
-        <Pending/>
+      <v-window-item class="window-item" value="pending">
+        <Pending />
       </v-window-item>
 
       <v-window-item class="window-item" value="notifications">
-        <Notifications/>
+        <Notifications />
       </v-window-item>
 
     </v-window>
@@ -28,7 +28,7 @@ import Notifications from "./dashboard/Notifications.vue";
 export default {
   name: 'Dashboard',
 
-  components:{
+  components: {
     Pending,
     Notifications
   },

@@ -1,10 +1,8 @@
 @import "../main.css";
 
 .dashboard {
-  background-color: #ffffff;
   width: auto;
   height: auto;
-  max-height: 100vh;
   border: none;
 }
 
@@ -33,8 +31,8 @@
 }
 
 .windows-container {
-  max-height: 100vh;
-  height: auto;
+  height: 90vh;
+  max-height: 90vh;
   margin-top: 1.4vh;
   padding: 1vh;
   box-shadow: rgba(0, 0, 0, 0.56) 0px 5px 5px 0px;
@@ -109,7 +107,7 @@
 
 .window-item {
   height: auto;
-  max-height: 100vh;
+  overflow-y: scroll;
 }
 .window-item .toolbar-header {
   background-color: var(--form-backgroundcolor_dark);

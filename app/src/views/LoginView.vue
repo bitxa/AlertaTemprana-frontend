@@ -6,10 +6,14 @@
     <div class="info-container">
       <v-carousel class="carousel" height="900" show-arrows="hover" cycle hide-delimiter-background>
         <template v-slot:prev="{ props }">
-          <v-btn rounded color="#E5EC00" @click="props.onClick"><AnFilledCaretLeft/></v-btn>
+          <v-btn rounded color="#E5EC00" @click="props.onClick">
+            <AnFilledCaretLeft />
+          </v-btn>
         </template>
         <template v-slot:next="{ props }">
-          <v-btn rounded color="#E5EC00" @click="props.onClick"><AnFilledCaretRight/></v-btn>
+          <v-btn rounded color="#E5EC00" @click="props.onClick">
+            <AnFilledCaretRight />
+          </v-btn>
         </template>
         <v-carousel-item v-for="(item, i) in carrouselImgs" :key="i" :src="item.src" cover></v-carousel-item>
       </v-carousel>
@@ -26,10 +30,12 @@
         <input type="email" name="email" id="email" placeholder="Correo institucional">
         <input type="password" name="password" id="password" placeholder="Contraseña">
 
-        <button type="button" @click="redirectToRespectivePanel">INGRESAR</button>
-
+        <v-btn type="button" @click="redirectToRespectivePanel">
+          INGRESAR
+        </v-btn>
       </form>
     </div>
+
   </div>
 </template>
   
@@ -37,12 +43,11 @@
 import { AnFilledCaretLeft } from "@kalimahapps/vue-icons";
 import { AnFilledCaretRight } from "@kalimahapps/vue-icons";
 
-
 export default {
   name: 'LoginView',
   components: {
     AnFilledCaretLeft,
-    AnFilledCaretRight
+    AnFilledCaretRight,
   },
 
   data() {
@@ -61,9 +66,10 @@ export default {
     }
   },
 
+
   methods: {
     redirectToRespectivePanel() {
-      window.location.href = '/student/panel';
+      this.$router.push('/student/select-hours');
     },
   },
 }

@@ -1,3 +1,5 @@
+<style src="@/assets/styles/dashboard/calendar/calendar.css"></style>
+
 <template>
   <v-card class="month-calendar scrollable">
     <div class="header">
@@ -22,13 +24,38 @@
       <div class="weekday" v-for="day in weekdays" :key="day">{{ day }}</div>
     </div>
     <div class="days">
-      <v-card v-for="day in days" :key="day.date" class="day">
+      <v-card v-for="day in days" :key="day.date" class="day" :class="{ 'isToday': isToday(day.date)}" >
         <div class="day-number">{{ day.date }}</div>
         <div class="events">
-          <v-btn v-for="event in getEventsForDay(day.date)" :key="event.id" class="event">
-            {{ event.title }}
-            <v-tooltip activator="parent" location="end">{{ event.description }}</v-tooltip>
-          </v-btn>
+
+          <v-dialog v-model="activeDialog" transition="dialog-top-transition" width="auto" class="event">
+            <template v-slot:activator="{ props }">
+              <button v-for="event in getEventsForDay(day.date)" :key="event.id" class="event-btn"
+                @click="openDialog(event)">
+                {{ event.title }}
+                <FlFilledWindowNew class="task-icon" />
+
+                <v-tooltip activator="parent" location="end">{{ event.title }}</v-tooltip>
+              </button>
+            </template>
+            <template v-slot:default="{ isActive }">
+              <v-card>
+                <v-toolbar density="compact" width="auto">
+                  <v-toolbar-title>
+                    {{ activeEvent.title }}
+                  </v-toolbar-title>
+                </v-toolbar>
+                <v-card-text>
+                  <div><b>Entrega: </b>{{ `${activeEvent.day}/${activeEvent.month}/${activeEvent.year}` }}</div>
+                  <div><b>Detalles: </b>{{ activeEvent.description }}</div>
+                  <v-btn density="comfortable" variant="tonal" color="#5865f2" class="mt-1">Ver tarea</v-btn>
+                </v-card-text>
+                <v-card-actions class="justify-end">
+                  <v-btn variant="text" @click="isActive.value = false">Volver</v-btn>
+                </v-card-actions>
+              </v-card>
+            </template>
+          </v-dialog>
         </div>
       </v-card>
     </div>
@@ -38,11 +65,12 @@
 <script>
 import { AkCircleChevronLeftFill } from "@kalimahapps/vue-icons";
 import { AkCircleChevronRightFill } from "@kalimahapps/vue-icons";
-
+import { FlFilledWindowNew } from "@kalimahapps/vue-icons";
 export default {
   components: {
     AkCircleChevronLeftFill,
     AkCircleChevronRightFill,
+    FlFilledWindowNew
   },
 
   data() {
@@ -70,9 +98,11 @@ export default {
       ],
       events: [
         { id: "1", title: "Evento 1", description: "lorem ipsum dolor sit amet", year: 2023, month: 6, day: 15 },
-        { id: "2", title: "Evento 2", description: "consectetur adipiscing elit", year: 2023, month: 6, day: 18 },
+        { id: "2", title: "lorem jas", description: "consectetur adipiscing elit", year: 2023, month: 6, day: 18 },
         { id: "3", title: "Evento 3", description: "sed do eiusmod tempor", year: 2023, month: 3, day: 22 },
       ],
+      activeDialog: false,
+      activeEvent: null,
     };
   },
   mounted() {
@@ -149,124 +179,17 @@ export default {
       });
       return filteredEvents;
     },
+    openDialog(event) {
+      this.activeEvent = event;
+      this.activeDialog = true;
+    },
+
+    //Check if the day is today
+    isToday(day) {
+      const today = new Date();
+      const d = new Date(this.selectedYear, this.selectedMonth, day);
+      return today.toDateString() === d.toDateString();
+    },
   },
 };
 </script>
-
-<style scoped>
-.month-calendar {
-  width: 100%;
-  height: 100%;
-  background-color: #f9f9f9;
-  margin-right: 2vh;
-}
-
-.header {
-  width: 100%;
-  text-align: center;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-.header button {
-  height: auto;
-  color: #febe01;
-  font-size: 2rem;
-  margin: 2vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-}
-
-.month {
-  text-transform: uppercase;
-  letter-spacing: 1vh;
-  font-weight: 800;
-  font-size: 1.5rem;
-  margin-right: 1rem;
-}
-
-.year {
-  background-color: transparent;
-  font-size: 2rem;
-  font-weight: 800;
-  letter-spacing: 1vh;
-}
-
-.selected-year:hover {
-  background-color: #f0f0f0;
-}
-
-.selected-year:selected {
-  background-color: #7F51F5;
-  color: #ffffff;
-}
-
-.weekdays {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 1vh;
-  background-color: #f9f9f9;
-  position: sticky;
-  top: 0;
-  z-index: 999;
-  height: 5vh;
-}
-
-.weekday {
-  text-align: center;
-  font-weight: bold;
-}
-
-.days {
-  height: 100%;
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 0.5vh;
-  padding: 0.7rem;
-  padding-top: 0;
-  margin-top: 0;
-  margin: 1vh;
-}
-
-.day {
-  border: 1px solid #e1e1e1;
-  height: auto;
-  min-height: 10vh;
-}
-
-.day-number {
-  margin: 1vh;
-  text-align: center;
-  width: 20%;
-  font-weight: bold;
-  color: #ffff;
-  border-radius: 50%;
-  margin-bottom: 1vh;
-  background-color: #7f51f5;
-}
-
-.date {
-  width: 60vh;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-}
-
-.events {
-  padding: 1vh;
-}
-
-.event {
-  width: 100%;
-  font-size: small;
-  color: #da0378;
-  border: 0.5px solid #da0378;
-  border-radius: 0.7vh;
-}
-</style>

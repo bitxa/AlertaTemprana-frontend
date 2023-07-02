@@ -1,8 +1,8 @@
 <style src="@/assets/styles/dashboard/pending/pending.css"></style>
 
 <template>
-    <div class="pending-window scrollable">
-        <v-container class="tasks_containerByDate">
+    <div class="pending-window">
+        <v-container class="tasks_containerByDate scrollable">
             <details class="hidden-tasks" open>
                 <summary>
                     <v-toolbar #title density="compact" class="toolbar-header">
@@ -41,6 +41,8 @@
                     </div>
                 </v-card>
             </details>
+
+            
         </v-container>
         <v-divider />
 
@@ -270,6 +272,10 @@ export default {
 
     data: () => ({
     }),
+    
+
+    //Make a function that deletes specific v-container when the button is clicked
+
 }
 </script>
   
