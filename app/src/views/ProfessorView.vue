@@ -1,4 +1,3 @@
-
 <style src="@/assets/styles/view.css"></style>
 
 <template>
@@ -14,133 +13,129 @@
             <img src="../assets/img/utpl_tec_logo.png" class="logo">
 
             <div class="user">
-                <UserInfo />
-            </div>
+                                    <UserInfo v-if="user" :user="user" />
+                                </div>
 
-            <div class="menu">
-                <button type="button" class="menu_button" @click="selectMenuItem('tasks')"
-                    :class="{ active: currentComponent === 'Tasks' }">
-                    <span>
-                        <MdAssignment class=" menu_icon" />
-                    </span>
-                    <v-tooltip activator="parent" location="start">Tareas</v-tooltip>
-                </button>
+                                <div class="menu">
+                                    <button type="button" class="menu_button" @click="selectMenuItem('evidencesSolicitations')"
+                                        :class="{ active: currentComponent === 'EvidencesSolicitations' }">
+                                        <span>
+                                            <MdAssignment class="menu_icon" />
+                                        </span>
+                                        <v-tooltip activator="parent" location="start">Asignaciones</v-tooltip>
+                                    </button>
 
-                <button type="button" class="menu_button" @click="selectMenuItem('evidences')"
-                    :class="{ active: currentComponent === 'Evidences' }">
-                    <span>
-                        <JaFillFiles class="menu_icon" />
-                    </span>
-                    <v-tooltip activator="parent" location="start">Evidencias</v-tooltip>
+                                    <button type="button" class="menu_button" @click="selectMenuItem('studentsProgress')"
+                                        :class="{ active: currentComponent === 'StudentsProgress' }">
+                                        <span>
+                                            <IoFootsteps class="menu_icon" />
+                                        </span>
+                                        <v-tooltip activator="parent" location="start">Progreso estudiantes</v-tooltip>
+                                    </button>
 
-                </button>
+                                    <button type="button" class="menu_button" @click="selectMenuItem('calendar')"
+                                        :class="{ active: currentComponent === 'Calendar' }">
+                                        <span>
+                                            <FaRegCalendarDays class="menu_icon" />
+                                        </span>
+                                        <v-tooltip activator="parent" location="start">Calendario tareas</v-tooltip>
+                                    </button>
+                                </div>
+                                <ThemeToogle />
+                            </aside>
 
-
-                <button type="button" class="menu_button" @click="selectMenuItem('workplacement')"
-                    :class="{ active: currentComponent === 'WorkPlacement' }">
-                    <span>
-                        <FaLayerGroup class="menu_icon" />
-                    </span>
-                    <v-tooltip activator="parent" location="start">Plaza</v-tooltip>
-                </button>
-
-                <button type="button" class="menu_button" @click="selectMenuItem('calendar')"
-                    :class="{ active: currentComponent === 'Calendar' }">
-                    <span>
-                        <FaRegCalendarDays class="menu_icon" />
-                    </span>
-                    <v-tooltip activator="parent" location="start">Calendario tareas</v-tooltip>
-                </button>
-            </div>
-            <ThemeToogle />
-        </aside>
-
-        <main>
-            <keep-alive>
-                <component :is="currentComponent" :key="currentComponent"></component>
-            </keep-alive>
-        </main>
-
+                            <main>
+                                <keep-alive>
+                                    <component :is="currentComponent" :key="currentComponent"></component>
+                                </keep-alive>
+                            </main>
     </v-container>
 </template>
 
 <script lang="ts">
-// ICONS
-import { MdAssignment } from "@kalimahapps/vue-icons";
-import { JaFillFiles } from "@kalimahapps/vue-icons";
-import { FaRegCalendarDays } from "@kalimahapps/vue-icons";
-import { FaLayerGroup } from "@kalimahapps/vue-icons";
-import { ChMenuKebab } from "@kalimahapps/vue-icons";
-import { MdRoundArrowBackIosNew } from "@kalimahapps/vue-icons";
-// FRAGMENTS
-import ThemeToogle from "@/components/fragments/ThemeToogle.vue"
+import { MdAssignment, JaFillFiles, FaRegCalendarDays, FaLayerGroup, ChMenuKebab, MdRoundArrowBackIosNew, IoFootsteps } from "@kalimahapps/vue-icons";
+import ThemeToogle from "@/components/fragments/ThemeToogle.vue";
 import UserInfo from "@/components/fragments/UserInfo.vue";
-// COMPONENTS
-import Tasks from "@/components/professor/Tasks.vue";
+import EvidencesSolicitations from "@/components/professor/EvidencesSolicitations.vue";
+import StudentsProgress from "@/components/professor/StudentsProgress.vue";
 
-
+import Calendar from "@/components/professor/Calendar.vue";
+import { useStore } from "@/stores/store";
+import { ref, watchEffect, type Ref } from "vue";
 
 export default {
-    name: 'ProfessorView',
+    name: "ProfessorView",
+
     components: {
-        //icons
         MdAssignment,
         JaFillFiles,
         FaRegCalendarDays,
         FaLayerGroup,
         ChMenuKebab,
+        IoFootsteps,
         MdRoundArrowBackIosNew,
-        //components
-        Tasks,
-
-        //fragments
         ThemeToogle,
-        UserInfo
+        UserInfo,
+        EvidencesSolicitations,
+        StudentsProgress,
+        Calendar,
     },
-    data() {
-        return {
-            currentComponent: localStorage.getItem('lastComponent') || 'Tasks',
-            showMenu: true,
-            timeout: null as any,
-            lightMode: false,
-        };
-    },
-    methods: {
-        selectMenuItem(menuItem: string) {
+
+    setup() {
+
+        const store = useStore();
+
+        const currentComponent: Ref<string> = ref('EvidencesSolicitations');
+
+        const user = store.getCurrentUser;
+
+        const selectMenuItem = (menuItem: string) => {
             switch (menuItem) {
-                case 'tasks':
-                    this.currentComponent = 'Tasks';
+                case 'evidencesSolicitations':
+                    currentComponent.value = 'EvidencesSolicitations';
                     break;
-                case 'evidences':
-                    this.currentComponent = 'Evidences';
-                    break;
-                case 'workplacement':
-                    this.currentComponent = 'WorkPlacement';
+                case 'studentsProgress':
+                    currentComponent.value = 'StudentsProgress';
                     break;
                 case 'calendar':
-                    this.currentComponent = 'Calendar';
+                    currentComponent.value = 'Calendar';
                     break;
             }
-            localStorage.setItem('lastComponent', this.currentComponent);
-        },
+        };
 
-        toggleMenu() {
-            this.showMenu = !this.showMenu;
-        },
+        const toggleMenu = () => {
+            showMenu.value = !showMenu.value;
+        };
 
-        hideMenuButton() {
-            this.showMenu = false;
-        },
-        showMenuButton() {
-            this.showMenu = true;
-        },
+        const hideMenuButton = () => {
+            showMenu.value = false;
+        };
 
-        toggleDarkMode() {
-            this.lightMode = !this.lightMode;
-        },
+        const showMenuButton = () => {
+            showMenu.value = true;
+        };
+
+        const toggleDarkMode = () => {
+            lightMode.value = !lightMode.value;
+        };
+
+        const showMenu = ref(true);
+        const lightMode = ref(false);
+
+
+        return {
+            user,
+            currentComponent,
+            selectMenuItem,
+            toggleMenu,
+            hideMenuButton,
+            showMenuButton,
+            toggleDarkMode,
+            showMenu,
+            lightMode,
+        };
     },
-
-
-}
+};
 </script>
+
 

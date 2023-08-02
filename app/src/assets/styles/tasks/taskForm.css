@@ -1,0 +1,62 @@
+.task-form {
+  width: 100%;
+}
+
+.field {
+  margin: 2vh;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0;
+}
+
+.title {
+  text-align: center;
+  max-height: 10vh;
+  padding: 2vh;
+  padding-bottom: 0;
+}
+
+.date-picker {
+  font-size: 1.5rem;
+  background-color: #f6f6f6;
+  padding: 2vh;
+  width: 100%;
+  border-radius: 1vh;
+  -webkit-border-radius: 1vh;
+  -moz-border-radius: 1vh;
+  -ms-border-radius: 1vh;
+  -o-border-radius: 1vh;
+}
+
+.row {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin: 3vh;
+  margin-left: 0;
+}
+
+input[type="time"] {
+  background-color: #f6f6f6;
+  padding: 1vh;
+  padding-right: 0;
+  border-radius: 1vh;
+  -webkit-border-radius: 1vh;
+  -moz-border-radius: 1vh;
+  -ms-border-radius: 1vh;
+  -o-border-radius: 1vh;
+  font: 900;
+  font-size: 1.5rem;
+  letter-spacing: 1vh;
+}
+
+.form-actions {
+  height: 10vh;
+  font-size: 3rem;
+}
+
+.form-actions small {
+  font-size: 0.8rem;
+}

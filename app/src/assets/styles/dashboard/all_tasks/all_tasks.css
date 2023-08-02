@@ -1,0 +1,27 @@
+.pending-window {
+  height: auto;
+  padding: 0%;
+}
+
+.tasks_containerByDate {
+  min-height: 10vh;
+  height: auto;
+  width: 100%;
+  padding: 1vh;
+  transition: all 0.3s ease;
+  -webkit-transition: all ;
+  -moz-transition: all ;
+  -ms-transition: all ;
+  -o-transition: all ;
+}
+
+.hidden-tasks .task{
+  width: 100%;
+}
+.hidden-tasks .task:hover{
+  transform: scale(1.01);
+  -webkit-transform: scale(1.01);
+  -moz-transform: scale(1.01);
+  -ms-transform: scale(1.01);
+  -o-transform: scale(1.01);
+}

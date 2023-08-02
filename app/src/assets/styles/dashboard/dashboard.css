@@ -6,6 +6,173 @@
   border: none;
 }
 
+.resume {
+  min-height: 30vh;
+  width: 100%;
+  padding: 4vh;
+}
+
+.resume .resume-content {
+  width: 100%;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 0;
+}
+
+.statistics {
+  flex-basis: 90%;
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  justify-content: space-between;
+  gap: 2vh;
+}
+
+.statistics p {
+  font-size: 1.2rem;
+  font-weight: 500;
+  letter-spacing: 0.2ch;
+  margin: 2vh;
+}
+
+@keyframes creativeShadowSpin {
+  0% {
+    transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    box-shadow: 0 0 10px 5px rgba(164, 158, 158, 0.5);
+  }
+
+  10% {
+    transform: rotate(30deg);
+    -webkit-transform: rotate(30deg);
+    box-shadow: 0 0 10px 5px rgba(164, 158, 158, 0.5);
+  }
+
+  20% {
+    transform: rotate(60deg);
+    -webkit-transform: rotate(60deg);
+    box-shadow: 20px 0 30px 15px rgba(169, 163, 163, 0.5);
+    -moz-transform: rotate(60deg);
+    -ms-transform: rotate(60deg);
+    -o-transform: rotate(60deg);
+  }
+
+  25% {
+    transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
+    box-shadow: 20px 0 30px 15px rgba(169, 163, 163, 0.5);
+  }
+
+  30% {
+    transform: rotate(120deg);
+    -webkit-transform: rotate(120deg);
+    box-shadow: 20px 0 30px 15px rgba(169, 163, 163, 0.5);
+    -moz-transform: rotate(120deg);
+    -ms-transform: rotate(120deg);
+    -o-transform: rotate(120deg);
+  }
+
+  40% {
+    transform: rotate(150deg);
+    -webkit-transform: rotate(150deg);
+    box-shadow: 0 -20px 40px 20px rgba(197, 189, 189, 0.5);
+    -moz-transform: rotate(150deg);
+    -ms-transform: rotate(150deg);
+    -o-transform: rotate(150deg);
+  }
+
+  50% {
+    transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    box-shadow: 0 -20px 40px 20px rgba(197, 189, 189, 0.5);
+  }
+
+  75% {
+    transform: rotate(270deg);
+    -webkit-transform: rotate(270deg);
+    box-shadow: -20px 0 30px 15px rgba(224, 218, 218, 0.5);
+  }
+
+  100% {
+    transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.5);
+    -moz-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+  }
+}
+
+.statistics .circle {
+  display: flex;
+  flex-direction: column;
+  font-size: 3rem;
+  align-items: center;
+  justify-content: center;
+  height: 25vh;
+  width: 25vh;
+  border-radius: 50%;
+  margin: 0 auto;
+  animation: creativeShadowSpin 1.4s ease-in-out;
+  -webkit-animation: creativeShadowSpin 1.4s ease-in-out;
+  position: relative;
+  z-index: 2;
+}
+
+.circle small {
+  font-size: 0.8rem;
+  font-weight: 200;
+}
+
+.circle.circle_pending {
+  background-image: radial-gradient(
+    closest-side,
+    transparent 70%,
+    rgba(239, 75, 75, 0.5) 75%,
+    #ef4b4b 10%
+  );
+}
+
+.circle.circle_in-progress {
+  background-image: radial-gradient(
+    closest-side,
+    transparent 70%,
+    rgba(255, 217, 102, 0.5) 75%,
+    #f7d060 76%
+  );
+}
+
+.circle.circle_done {
+  background-image: radial-gradient(
+    closest-side,
+    transparent 70%,
+    rgba(169, 236, 162, 0.5) 75%,
+    #a2ff86 76%
+  );
+}
+
+.user-3d-model {
+  flex-basis: 10%;
+  position: relative;
+  width: 100%; /* Adjust as needed */
+  max-height: 100%;
+}
+
+.user-3d-model-img {
+  z-index: 2; /* Adjust as needed to ensure the image appears above other elements */
+}
+
+.timeline-info{
+  padding: 2vh;
+  padding-top: 0%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 5vh;
+}
+
 .tabs-menu {
   display: flex;
   justify-content: center;
@@ -51,7 +218,7 @@
   margin: 1vh;
 }
 .tasks_containerByDate .task .task-info {
-  flex-basis: 99%;
+  flex-basis: 100%;
 }
 .tasks_containerByDate .task .task-info .task-title {
   font-size: 1rem;
@@ -65,11 +232,12 @@
 }
 
 .tasks_containerByDate .task .task-actions .action-button {
-  height: 70%;
+  height: auto;
+  max-height: 50%;
+  padding: 2vh;
   display: flex;
   text-align: center;
-  background-color: #1876ef;
-  color: #ffffff;
+  color: #121212;
   font-size: 1rem;
   font-weight: 800;
   transition: 0.2s ease-in-out;
@@ -117,6 +285,7 @@
   -moz-border-radius: 0.9vh;
   -ms-border-radius: 0.9vh;
   -o-border-radius: 0.9vh;
+  padding: 2vh;
 }
 
 .window-item .toolbar-header .toolbar-header-items {

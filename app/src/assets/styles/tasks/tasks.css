@@ -1,0 +1,157 @@
+.task-formOverlay {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+}
+
+.task-formDialog{
+  width: 165vh;
+  margin: 0 auto;
+  padding: 0;
+}
+
+.tasksWindow {
+  height: auto;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #eeeeee;
+  border-radius: 10vh;
+  padding: 1.9vh;
+  margin: 1vh;
+  padding-left: 1vh;
+}
+
+.section-header .info {
+  padding: 2vh;
+  font-size: 1rem;
+}
+
+.section-header .new-btn {
+  background-color: #febe01;
+  color: #f6f6f6;
+  font-weight: bolder;
+  border-radius: 2vh;
+}
+
+.section-header .new-btn .icon {
+  width: auto;
+  padding: 0;
+  font-size: 1rem;
+}
+
+.tasks {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  justify-content: center;
+  align-items: start;
+  grid-gap: 6vh 4vh;
+  padding: 1em;
+  padding-top: 2.6em;
+  width: 100%;
+  min-height: 90vh;
+  max-height: 100vh;
+  overflow-y: scroll;
+}
+.task {
+  margin: 0 auto;
+  width: 90%;
+  max-width: 100%;
+  height: auto;
+  padding: 2vh;
+  max-height: none;
+  transition: width ease-in-out 2s;
+  box-shadow: 0px 0px 15px 5px rgba(16, 17, 18, 0.2);
+  border-radius: 10px;
+  -webkit-transition: width ease-in-out 2s;
+  -moz-transition: width ease-in-out 2s;
+  -ms-transition: width ease-in-out 2s;
+  -o-transition: width ease-in-out 2s;
+}
+.task .title {
+  display: flex;
+  background-color: #febe01;
+  color: #00416f;
+  justify-content: center;
+  width: auto;
+  min-width: 30%;
+  padding: 1vh;
+  align-items: center;
+  border-radius: 3vh;
+  -webkit-border-radius: 3vh;
+  -moz-border-radius: 3vh;
+  -ms-border-radius: 3vh;
+  -o-border-radius: 3vh;
+}
+
+.task .task-icon {
+  display: block;
+  position: absolute;
+  right: 0;
+  font-size: 3rem;
+  color: #00416f;
+}
+
+.task .task-section {
+  margin: 1vh;
+}
+
+.details-content {
+  padding: 0;
+}
+
+.details-info {
+  margin: 1vh;
+}
+
+.task .card-actions {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.task .card-actions .action-btn {
+  background-color: rgba(238, 238, 238, 0.5);
+}
+
+.progress-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgb(255, 255, 255);
+  opacity: 70%;
+  z-index: 1000;
+}
+
+.no-tasks-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top: 15vh;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 1.2rem;
+  color: #666;
+  height: 100%;
+}
+
+.no-tasks-message h3 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+
+.no-tasks-message p {
+  margin-top: 8px;
+} 

@@ -22,47 +22,47 @@
     </div>
 
     <div class="weekdays">
-        <div class="weekday" v-for="day in weekdays" :key="day.date">{{ day }}</div>
-      </div>
+      <div class="weekday" v-for="day in weekdays" :key="day.date">{{ day }}</div>
+    </div>
 
-      <div class="days">
-        <v-card v-for="day in days" :key="day.date" class="day" :class="{ 'isToday': isToday(day.date) }">
-          <div class="day-number">{{ day.date }}</div>
-          <div class="events">
-            <div class="event">
-              <v-dialog v-model="activeDialogs[day.date]" transition="dialog-top-transition" width="auto">
-                <template v-slot:activator="{ props }">
-                  <button v-for="event in getEventsForDay(day.date)" :key="event.id" class="event-btn"
-                    @click="openDialog(event, day)">
-                    <small class="mr-1" style=" color: #f3369d; font-size: 0.7rem;">{{ event.deadlineTime }}</small>{{
-                      event.title }}
-                    <FlFilledWindowNew class="task-icon" />
+    <div class="days">
+      <v-card v-for="day in days" :key="day.date" class="day" :class="{ 'isToday': isToday(day.date) }">
+        <div class="day-number">{{ day.date }}</div>
+        <div class="events">
+          <div class="event">
+            <v-dialog v-model="activeDialogs[day.date]" transition="dialog-top-transition" width="auto">
+              <template v-slot:activator="{ props }">
+                <button v-for="event in getEventsForDay(day.date)" :key="event.id" class="event-btn"
+                  @click="openDialog(event, day)">
+                  <small class="mr-1" style=" color: #f3369d; font-size: 0.7rem;">{{ event.deadlineTime }}</small>{{
+                    event.title }}
+                  <FlFilledWindowNew class="task-icon" />
 
-                    <v-tooltip activator="parent" location="end">{{ event.title }}</v-tooltip>
-                  </button>
-                </template>
-                <template v-slot:default="{ isActive }">
-                  <v-card>
-                    <v-toolbar density="compact" width="auto">
-                      <v-toolbar-title>
-                        {{ activeEvent.title }}
-                      </v-toolbar-title>
-                    </v-toolbar>
-                    <v-card-text>
-                      <div><b>Fecha de publicación: </b>{{ formatDate(activeEvent.publicationDate) }}</div>
-                      <div><b>Fecha de entrega: </b>{{ activeEvent.deadline }} {{ activeEvent.deadlineTime }}</div>
-                      <div><b>Descripción: </b>{{ activeEvent.description }}</div>
-                      <div><b>Detalles: </b>{{ activeEvent.details }}</div>
-                      <v-btn density="comfortable" variant="tonal" color="#5865f2" class="mt-1">Ver tarea</v-btn>
-                    </v-card-text>
-                    <v-card-actions class="justify-end">
-                      <v-btn variant="text" @click="isActive.value = false">Volver</v-btn>
-                    </v-card-actions>
-                  </v-card>
-                </template>
-              </v-dialog>
-            </div>
+                  <v-tooltip activator="parent" location="end">{{ event.title }}</v-tooltip>
+                </button>
+              </template>
+              <template v-slot:default="{ isActive }">
+                <v-card>
+                  <v-toolbar density="compact" width="auto">
+                    <v-toolbar-title>
+                      {{ activeEvent.title }}
+                    </v-toolbar-title>
+                  </v-toolbar>
+                  <v-card-text>
+                    <div><b>Fecha de publicación: </b>{{ formatDate(activeEvent.publicationDate) }}</div>
+                    <div><b>Fecha de entrega: </b>{{ activeEvent.deadline }} {{ activeEvent.deadlineTime }}</div>
+                    <div><b>Descripción: </b>{{ activeEvent.description }}</div>
+                    <div><b>Detalles: </b>{{ activeEvent.details }}</div>
+                    <v-btn density="comfortable" variant="tonal" color="#5865f2" class="mt-1">Ver tarea</v-btn>
+                  </v-card-text>
+                  <v-card-actions class="justify-end">
+                    <v-btn variant="text" @click="isActive.value = false">Volver</v-btn>
+                  </v-card-actions>
+                </v-card>
+              </template>
+            </v-dialog>
           </div>
+        </div>
       </v-card>
     </div>
   </v-card>

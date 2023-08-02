@@ -4,6 +4,7 @@
   display: flex;
   padding: 0;
   min-height: 100vh;
+  height: auto;
   background-color: var(--backgroundcolor_dark);
 }
 
@@ -32,24 +33,38 @@ aside .menu {
   margin: 2vh;
   margin-top: 0;
   width: 100%;
-  height: 100%;
+  height: 80%;
 }
 
 .menu button {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   color: var(--fontcolor_dark);
-  font-size: 2.2vh;
   margin: 1vh;
-  padding: 1.6vh;
+  padding: 1.9vh;
   border-radius: 50%;
+  transition: all 0.3s ease;
   -webkit-border-radius: 50%;
   -moz-border-radius: 50%;
   -ms-border-radius: 50%;
   -o-border-radius: 50%;
   -webkit-border-radius: 50%;
+  -webkit-transition: all ;
+  -moz-transition: all ;
+  -ms-transition: all ;
+  -o-transition: all ;
+}
+
+.menu button:hover{
+  background-color: #00416F;
+  transform: rotate3d(1, 2, 3, 10deg) scale(1.3);
+  text-decoration-color: #00416F;
+  -webkit-transform: rotate3d(1, 2, 3, 10deg) scale(1.3);
+  -moz-transform: rotate3d(1, 2, 3, 10deg) scale(1.3);
+  -ms-transform: rotate3d(1, 2, 3, 10deg) scale(1.3);
+  -o-transform: rotate3d(1, 2, 3, 10deg) scale(1.3);
 }
 .menu button span {
   display: flex;
@@ -63,16 +78,12 @@ aside .menu {
 }
 
 .menu button span .menu_icon {
-  font-size: 2.5rem;
-}
-
-.menu_button:hover {
-  transition-duration: 0.2s;
-  background-color: var(--secondary_background_color_dark);
+  font-size: 2.4rem;
 }
 
 .menu_button.active {
-  background-color: var(--secondary_background_color_dark);
+  color: #f4f4ff  !important;
+  background-color: var(--secondary_background_color_dark) !important;
 }
 
 .menu-toggle-button {
@@ -156,4 +167,9 @@ aside .aside-close-icon {
     object-fit: contain;
     aspect-ratio: 1/1;
   }
+}
+
+
+.v-overlay--scrim{
+  background-color: rgba(0, 0, 0, 1);
 }

@@ -1,5 +1,5 @@
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400&display=swap');
 </style>
 
 <template>
@@ -15,7 +15,7 @@ import { defineComponent, onMounted } from 'vue';
 
 export default defineComponent({
   name: 'App',
-  
+
 
   data() {
     return {

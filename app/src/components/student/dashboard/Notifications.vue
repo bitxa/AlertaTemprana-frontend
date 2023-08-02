@@ -1,5 +1,4 @@
-<style src="@/assets/styles/dashboard/notifications/notifications.css"></style>
-
+<style scoped src="@/assets/styles/dashboard/notifications/notifications.css"></style>
 
 <template>
     <div class="d-flex flex-row notifications-window">

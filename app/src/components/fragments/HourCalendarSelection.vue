@@ -51,10 +51,10 @@ export default {
 
   setup() {
     const daysOfWeek = ["Lun.", "Mar.", "Mié.", "Jue.", "Vie.", "Sáb.", "Dom."]
-    const selectedHours = reactive(Array(7).fill(0).map(() => Array(24).fill(false)))// Create new array for each day
+    const selectedHours = reactive(Array(7).fill(0).map(() => Array(24).fill(false)))
 
-    const startHour = setHours(startOfDay(new Date()), 7); // Set start hour to 7 AM
-    const endHour = setHours(endOfDay(new Date()), 20); // Set end hour to 8 PM
+    const startHour = setHours(startOfDay(new Date()), 7);
+    const endHour = setHours(endOfDay(new Date()), 20);
 
     const hours = eachHourOfInterval({
       start: startHour,
@@ -72,7 +72,7 @@ export default {
 
   methods: {
     saveHours() {
-      this.$router.push('/student/panel');
+      this.$router.push('/student/personal-data');
     },
 
     validateHours() {

@@ -2,9 +2,8 @@
   min-height: 100vh;
   height: auto;
   padding: 0%;
-}
 
-/*I want the notifications-menu to be sticky, so I can scroll through the notifications-container*/
+}
 
 .notifications-menu {
   height: 100%;
@@ -20,7 +19,6 @@
   padding: 1vh;
   margin: 2vh;
   background-color: #1e1e1e;
-  color: #ffffff;
   border-radius: 1vh;
   -webkit-border-radius: 1vh;
   -moz-border-radius: 1vh;

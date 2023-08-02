@@ -9,15 +9,35 @@ import es from "date-fns/locale/es";
 
 // Vuetify
 import "vuetify/styles";
-import 'vuetify/dist/vuetify.css';
+import "vuetify/dist/vuetify.css";
 import { createVuetify } from "vuetify";
 import * as components from "vuetify/components";
 import * as directives from "vuetify/directives";
 
+//MDI
+import "@mdi/font/css/materialdesignicons.css";
+
 // CSS
 import "material-icons/iconfont/material-icons.css";
 
-//ProCalendar
+//Firebase
+import { initializeApp } from "firebase/app";
+import "firebase/storage";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBxPlVeXmCYwP-g029uHrUC0aBEF8oPe18",
+  authDomain: "alertatemprana-utpl.firebaseapp.com",
+  projectId: "alertatemprana-utpl",
+  storageBucket: "alertatemprana-utpl.appspot.com",
+  messagingSenderId: "976747645210",
+  appId: "1:976747645210:web:921139ff2b1e96aef904a3",
+  measurementId: "G-5X73R0BDYY",
+};
+
+// Initialize Firebase
+const firebaseApp = initializeApp(firebaseConfig);
+
+export { firebaseApp };
 
 const vuetify = createVuetify({
   components,
@@ -53,7 +73,6 @@ const vuetify = createVuetify({
 
     ...directives,
   },
-
 });
 
 const pinia = createPinia();
@@ -64,3 +83,4 @@ app.use(vuetify);
 app.use(pinia);
 
 app.mount("#app");
+

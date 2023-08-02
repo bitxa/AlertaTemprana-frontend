@@ -14,73 +14,95 @@
             <img src="../assets/img/utpl_tec_logo.png" class="logo">
 
             <div class="user">
-                <UserInfo />
-            </div>
+                                        <UserInfo v-if="user" :user="user" />
+                                    </div>
 
-            <div class="menu">
-                <button type="button" class="menu_button" @click="selectMenuItem('dashboard')"
-                    :class="{ active: currentComponent === 'Dashboard' }">
-                    <span>
-                        <FlFilledPanelSeparateWindow class=" menu_icon" />
-                    </span>
-                        <v-tooltip activator="parent" location="start">Panel</v-tooltip>
-                </button>
+                                    <div class="menu">
+                                        <button type="button" class="menu_button" @click="selectMenuItem('dashboard')"
+                                            :class="{ active: currentComponent === 'Dashboard' }">
+                                            <span>
+                                                <FlFilledPanelSeparateWindow class=" menu_icon" />
+                                            </span>
 
-                <button type="button" class="menu_button" @click="selectMenuItem('evidences')"
-                    :class="{ active: currentComponent === 'Evidences' }">
-                    <span>
-                        <JaFillFiles class="menu_icon" />
-                    </span>
-                    <v-tooltip activator="parent" location="start">Evidencias</v-tooltip>
+                                            <v-tooltip activator="parent" location="start">Panel</v-tooltip>
+                                        </button>
 
-                </button>
+                                        <button type="button" class="menu_button" @click="selectMenuItem('practicumVacancy')"
+                                            :class="{ active: currentComponent === 'PracticumVacancy' }">
+                                            <span>
+                                                <FaLayerGroup class="menu_icon" />
+                                            </span>
+                                            <v-tooltip activator="parent" location="start">Plaza</v-tooltip>
+                                        </button>
 
+                                        <button type="button" class="menu_button" @click="selectMenuItem('calendar')"
+                                            :class="{ active: currentComponent === 'Calendar' }">
+                                            <span>
+                                                <FaRegCalendarDays class="menu_icon" />
+                                            </span>
+                                            <v-tooltip activator="parent" location="start">Calendario tareas</v-tooltip>
+                                        </button>
+                                    </div>
+                                    <ThemeToogle />
+                                </aside>
 
-                <button type="button" class="menu_button" @click="selectMenuItem('workplacement')"
-                    :class="{ active: currentComponent === 'WorkPlacement' }">
-                    <span>
-                        <FaLayerGroup class="menu_icon" />
-                    </span>
-                    <v-tooltip activator="parent" location="start">Plaza</v-tooltip>
-                </button>
+                                <main>
+                                    <keep-alive>
+                                        <component :is="currentComponent" :key="currentComponent"></component>
+                                    </keep-alive>
+                                </main>
 
-                <button type="button" class="menu_button" @click="selectMenuItem('calendar')"
-                    :class="{ active: currentComponent === 'Calendar' }">
-                    <span>
-                        <FaRegCalendarDays class="menu_icon" />
-                    </span>
-                    <v-tooltip activator="parent" location="start">Calendario tareas</v-tooltip>
-                </button>
-            </div>
-            <ThemeToogle />
-        </aside>
+                                <v-dialog v-model="info_dialog" persistent>
+                                    <v-card class="place-info">
+                                        <v-card-title class="headline">
+                                            <AkInfoFill />
+                                            <h6>Información</h6>
+                                        </v-card-title>
+                                        <v-card-text>
+                                            <p>Has sido asigad@ a la siguiente plaza:</p>
+                                            <br>
+                                            <span class="initial-info">
+                                                <p><b>Empresa:</b> Nodo Lab.Co </p>
+                                                <p><b>Tipo: </b> Externa</p>
+                                                <p><b>Tutor: </b> Jimmy Jose Jaramillo</p>
+                                                <p><b>Correo: </b> nodolab2@electritele.com</p>
+                                            </span>
 
-        <main>
-            <keep-alive>
-                <component :is="currentComponent" :key="currentComponent"></component>
-            </keep-alive>
-        </main>
-
+                                            <small class="comunication">
+                                                <br>
+                                                <p><small>Ir al apartado <b><i> <a href="">plaza</a></i></b> para más información ...</small></p>
+                                                Cualquier duda o inconveniente comunicarse directamente con el tutor de la plaza o con su docente
+                                                tutor.
+                                            </small>
+                                        </v-card-text>
+                                        <v-card-actions>
+                                            <v-spacer></v-spacer>
+                                            <v-btn color="green darken-1" text @click="info_dialog = false">Okay</v-btn>
+                                        </v-card-actions>
+                                    </v-card>
+                                </v-dialog>
     </v-container>
 </template>
 
 <script lang="ts">
 // ICONS
-import { FlFilledPanelSeparateWindow } from "@kalimahapps/vue-icons";
-import { JaFillFiles } from "@kalimahapps/vue-icons";
-import { FaRegCalendarDays } from "@kalimahapps/vue-icons";
-import { FaLayerGroup } from "@kalimahapps/vue-icons";
-import { ChMenuKebab } from "@kalimahapps/vue-icons";
-import { MdRoundArrowBackIosNew } from "@kalimahapps/vue-icons";
+
+import { FlFilledPanelSeparateWindow, JaFillFiles, AkInfoFill, FaRegCalendarDays, FaLayerGroup, ChMenuKebab, MdRoundArrowBackIosNew } from "@kalimahapps/vue-icons";
 // FRAGMENTS
 import ThemeToogle from "@/components/fragments/ThemeToogle.vue"
 import UserInfo from "@/components/fragments/UserInfo.vue";
 // COMPONENTS
 import Dashboard from "@/components/student/Dashboard.vue";
-import Evidences from "@/components/student/Evidences.vue";
-import WorkPlacement from "@/components/student/WorkPlacement.vue";
-import Calendar from "@/components/student/Calendar.vue";
 
+import PracticumVacancy from "@/components/student/PracticumVacancy.vue";
+import Calendar from "@/components/student/Calendar.vue";
+import { useStore } from '@/stores/store';
+import { ref } from "vue";
+import type { Ref } from "vue";
+
+import Docxtemplater from "docxtemplater";
+import JSZipUtils from "jszip-utils";
+import JSZip from "jszip";
 
 export default {
     name: 'StudentView',
@@ -92,20 +114,33 @@ export default {
         FaLayerGroup,
         ChMenuKebab,
         MdRoundArrowBackIosNew,
+        AkInfoFill,
         //components
         Dashboard,
-        Evidences,
-        WorkPlacement,
+        PracticumVacancy,
         Calendar,
         //fragments
         ThemeToogle,
         UserInfo
     },
+
+    setup() {
+
+        const store = useStore();
+        const user = store.getCurrentUser;
+
+        const info_dialog = ref(true);
+        const currentComponent: Ref<string> = ref('Dashboard');
+
+        return {
+            user,
+            info_dialog,
+            currentComponent,
+        }
+    },
     data() {
         return {
-            currentComponent: localStorage.getItem('lastComponent') || 'Dashboard',
             showMenu: true,
-            timeout: null as any,
             lightMode: false,
         };
     },
@@ -115,17 +150,13 @@ export default {
                 case 'dashboard':
                     this.currentComponent = 'Dashboard';
                     break;
-                case 'evidences':
-                    this.currentComponent = 'Evidences';
-                    break;
-                case 'workplacement':
-                    this.currentComponent = 'WorkPlacement';
+                case 'practicumVacancy':
+                    this.currentComponent = 'PracticumVacancy';
                     break;
                 case 'calendar':
                     this.currentComponent = 'Calendar';
                     break;
             }
-            localStorage.setItem('lastComponent', this.currentComponent);
         },
 
         toggleMenu() {
@@ -147,4 +178,36 @@ export default {
 
 }
 </script>
+
+<style scoped>
+.headline {
+    display: flex;
+    align-items: center;
+    padding: 2vh;
+}
+
+.headline * {
+    font-size: 1.6rem;
+    margin-left: 1vh;
+    color: #257FFF;
+}
+
+.place-info {
+    color: #393E46;
+    min-height: 50vh;
+
+}
+
+.comunication {
+    width: 86%;
+    margin-top: 1rem;
+    font-weight: 400 !important;
+    opacity: 0.5;
+}
+
+.initial-info {
+    display: flex;
+    flex-direction: column;
+}
+</style>
 

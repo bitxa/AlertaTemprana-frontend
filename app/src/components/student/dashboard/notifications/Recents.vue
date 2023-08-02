@@ -379,6 +379,11 @@ export default {
 <style>
 .notification {
     margin: 1vh;
+    transition: all 0.3s ease-in-out;
+}
+
+.notification:hover{
+    transform: scale(1.01) 
 }
 
 #author {
@@ -387,7 +392,6 @@ export default {
 }
 
 :root {
-    --notification-background:  rgba(253, 191, 1, 0.9);
-
+    --notification-background: #F5F5F5;
 }
 </style>
